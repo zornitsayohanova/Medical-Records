@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+
+    <title>Резултат за диагноза</title>
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/diagnose.css}" rel="stylesheet" />
+</head>
+<body>
+
+<header th:replace="base-fragment::header"></header>
+<img class="background-image" src="/css/pics/diagnose.jpg">
+
+<div class="background-info">
+    <form id="search-form" th:action="@{/diagnose}" th:object="${diagnose}" method="POST">
+        <input type="hidden" name="portion" value="2" />
+        <div class="mid-title">
+            Брой пациенти с
+            <div class="diagnose-text" th:text="${diagnoseName}"></div>
+            <div class="number-text" th:text="${diagnosePatientsAmount}"></div>
+        </div>
+    </form>
+    <a class="mid-title" href="/diagnose">
+        <button class="change-btn btn btn-style">
+            Ново търсене
+        </button>
+    </a>
+</div>
+</body>
+</html>

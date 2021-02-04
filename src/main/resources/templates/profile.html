@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+
+    <title>Профил</title>
+
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="page-title">Профил</div>
+<header th:replace="base-fragment::header"></header>
+<img class="background-image" src="/css/pics/profile.jpg">
+
+<div class="background-info form-container modal-body" sec:authorize="hasAuthority('PATIENT')">
+    <div class="modal-dialog modal-login">
+        <h4 class="title">Моля, попълнете Вашите пациентски данни</h4>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="modal-body">
+                        <form action="#" th:action="@{/profile/patient}" th:object="${patient}" method="post">
+                            <div class="form-group">
+                                    <input type="text" th:field="*{firstName}" placeholder="Име" class="form-control" name="id" required="required" />
+                            </div>
+                            <div class="form-group">
+                                    <input type="text" th:field="*{secondName}" placeholder="Презиме" class="form-control" name="id" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" th:field="*{thirdName}" placeholder="Фамилия" class="form-control" name="id" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" th:field="*{egn}" placeholder="ЕГН" class="form-control" name="id" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" th:field="*{gp.doctorSpecialId}" placeholder="ID на Джи Пи" class="form-control" name="id" required="required" />
+                            </div>
+                            <div class="form-group">
+                                <label>Платени ли са здравните осигуровки последните 6 месеца?</label>
+                                <input type="checkbox"  class="custom-control-input" th:field="${patient.insurancePaid}"  checked="" name="id"/>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-primary btn-block login-btn">Промени</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="background-info form-container modal-body" sec:authorize="hasAuthority('DOCTOR')">
+    <div class="modal-dialog modal-login">
+        <h4 class="title">Моля, попълнете Вашите лекарски данни</h4>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="modal-body">
+                        <form action="#" th:action="@{/profile/doctor}" th:object="${doctor}" method="post">
+                            <div class="form-group">
+                                <input type="text" th:field="*{firstName}"
+                                       placeholder="Име" class="form-control"
+                                       name="first-name" required="required"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" th:field="*{secondName}"
+                                       placeholder="Презиме" class="form-control"
+                                       name="second-name" required="required"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <input type="text" th:field="*{thirdName}"
+                                       placeholder="Фамилия" class="form-control"
+                                       name="third-name" required="required"
+                                />
+                            </div>
+                            <label>Специалност/и</label>
+                            <div class="form-group">
+                                <button data-toggle="dropdown"
+                                        class="btn btn-default dropdown-toggle" type="button">
+                                        <span class="caret"></span>
+                                </button>
+                                <ul role="menu" class="dropdown-menu scrollbar">
+                                    <input type="checkbox" name="roles"
+                                           th:each="specialty:${allSpecialties}"
+                                           th:text="${specialty.specialtyName}"
+                                           th:value="${specialty.id}"
+                                           th:field="*{specialties}"
+                                    />
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label>ДжиПи ли сте?</label>
+                                <input type="checkbox" class="gp-checkbox" th:field="${doctor.GP}" checked="" name="is-gp" />
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-primary btn-lg btn-block login-btn">
+                                    Промени
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-container modal-body">
+    <div class="modal-dialog modal-login">
+        <h4 class="title">Моля, попълнете нова парола, ако желаете смяна на старата</h4>
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="modal-body">
+                        <form action="#" data-th-action="@{/new-password}" th:object="${user}" method="POST">
+                            <div class="form-group">
+                                <input type="password" th:field="*{password}"
+                                       placeholder="Нова парола" name="password"
+                                       class="form-control" required="required"
+                                       value=""
+                                />
+                                <button type="submit" class="change-btn btn btn-lg btn-style">Промени</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

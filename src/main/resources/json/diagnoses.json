@@ -1,0 +1,27 @@
+[
+  {
+    "diagnoseName": "Дивертикулоза на червата и дивертикулит",
+    "diagnosePatientsAmount": "0",
+    "diagnoseSpecialId": "1"
+  },
+  {
+    "diagnoseName": "Хипертония",
+    "diagnosePatientsAmount": "0",
+    "diagnoseSpecialId": "2"
+  },
+  {
+    "diagnoseName": "Пиелонефрит",
+    "diagnosePatientsAmount": "0",
+    "diagnoseSpecialId": "3"
+  },
+  {
+    "diagnoseName": "Остеопороза",
+    "diagnosePatientsAmount": "0",
+    "diagnoseSpecialId": "4"
+  },
+  {
+    "diagnoseName": "Мултиплезна склероза",
+    "diagnosePatientsAmount": "0",
+    "diagnoseSpecialId": "5"
+  }
+]

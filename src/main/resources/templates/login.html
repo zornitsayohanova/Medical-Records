@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+    <title>Вход</title>
+
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/home.css}" rel="stylesheet" />
+    <link th:href="@{/css/entrance.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div id="login" class="modal">
+    <div class="login-doc modal-dialog modal-login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="avatar">
+                </div>
+                <button onclick="window.location.href='/'" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div>
+                <form th:action="@{/login}" method="POST">
+                    <fieldset>
+                        <div th:if="${param.error}" class="alert alert-dismissible fade show message">
+                            Грешни данни!
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-dismissible fade show message">
+                            Не сте логнат!
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" placeholder="ID" class="form-control" id="username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Парола" class="form-control" id="password" name="password">
+                        </div>
+                        <button type="submit" class="btn-primary btn-block login-btn">Вход</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(".close").click(function() {
+        if ($('.modal:visible')) {
+            $('.modal').attr('style','display:none !important');
+        } else {
+            $('.modal').attr('style','display:block !important');
+        }
+    });
+</script>
+
+</body>
+</html>

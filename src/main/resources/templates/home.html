@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+
+    <title>Medical records</title>
+
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/home.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="background">
+    <div class="content-container">
+        <div class="page-title"> Национален регистър на медицинските досиета </div>
+        <div class="menu" th:width="300px" th:height="300px">
+            <div class="nav" id="collapsibleNavbar">
+                <ul>
+                    <li class="nav-item">
+                        <a href="/register">Регистрация</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/login">Вход</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <img src="css/pics/home.jpg" class="home-pic"/>
+    </div>
+</div>
+</body>
+</html>

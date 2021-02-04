@@ -1,0 +1,46 @@
+
+.table > thead > tr > th {
+    vertical-align: center !important;
+}
+
+.table li {
+  margin-bottom: 0 !important;
+}
+
+.search-container {
+    margin-left: 9%;
+}
+
+.egn-text {
+    width: 30px;
+}
+
+.doctors-tbl .scrollbar {
+    margin-top: 0 !important;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.doctors-tbl .background-info {
+    margin-top: 15%;
+}
+
+.dot-background {
+    margin-right: 60px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 25px;
+    border-radius: 120px;
+    background-color: #5a5ea8;
+}
+
+@media only screen and (min-width: 350px) and (max-width: 1000px) {
+    .block {
+       background-image: url("pics/doctor.jpg");
+    }
+
+
+    .egn-text {
+        width: 100%;
+    }
+}

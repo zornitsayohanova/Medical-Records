@@ -1,0 +1,22 @@
+[
+  {
+    "specialtyName": "Гастроентерология",
+    "specialtySpecialId": "1"
+  },
+  {
+    "specialtyName": "Кардиология",
+    "specialtySpecialId": "2"
+  },
+  {
+    "specialtyName": "Нефрология",
+    "specialtySpecialId": "3"
+  },
+  {
+    "specialtyName": "Ортопедия и травматология",
+    "specialtySpecialId": "4"
+  },
+  {
+    "specialtyName": "Нервни болести",
+    "specialtySpecialId": "5"
+  }
+]

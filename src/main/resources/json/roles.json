@@ -1,0 +1,14 @@
+[
+  {
+    "authority": "PATIENT",
+    "roleId": "1"
+  },
+  {
+    "authority": "DOCTOR",
+    "roleId": "2"
+  },
+  {
+    "authority": "ADMIN",
+    "roleId": "3"
+  }
+]

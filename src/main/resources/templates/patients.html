@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+
+    <title>Пациенти</title>
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/patients.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="page-title">Пациенти</div>
+<div class="search-bar">
+    <form id="search-form" th:action="@{/patients}" th:object="${patientToSearch}" method="POST">
+        <div class="search-field">
+            <div class="form-group">
+                <input id="filter" name="filter" type="text" th:field="*{firstName}" placeholder="Име и фамилия на пациент" class="form-control input-sm w-auto inline m-r"/>
+                <button type="submit" id="search-btn" class="btn btn-primary btn-lg btn-block login-btn">
+                    <img src="../css/pics/search-bar.png">
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<header th:replace="base-fragment::header"></header>
+<img class="background-image" src="/css/pics/patient.jpg">
+
+<a href="/diagnose" class="diagnose-title">
+    <button type="submit" class="change-btn btn btn-style">
+        Статистика по диагноза
+    </button>
+</a>
+<div class="background-info">
+    <div class="list" th:if="${not #lists.isEmpty(resultPatients)}">
+        <div class="patients-tbl">
+            <div class="scrollbar">
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th>ЕГН</th>
+                        <th>Име</th>
+                        <th>Презиме</th>
+                        <th>Фамилия</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr th:each="patient:${resultPatients}">
+                        <td>
+                            <div class="egn-text" th:text="${patient.egn}"></div>
+                        </td>
+                        <td th:text="${patient.firstName}"></td>
+                        <td th:text="${patient.secondName}"></td>
+                        <td th:text="${patient.thirdName}"></td>
+                        <td class="more-btn">
+                            <form action="#" data-th-action="@{/patients/patient}" method="POST">
+                                <input type="hidden" name="patientSpecialId" data-th-value="${patient.patientSpecialId}" class="form-control">
+
+                                <button type="submit" class="change-btn btn btn-style">Още</button>
+                            </form>
+                            <form action="#" data-th-action="@{/patients/delete-patient}" method="POST">
+                                <input type="hidden" name="patientSpecialId" data-th-value="${patient.patientSpecialId}" class="form-control">
+                                <button type="submit" class="change-btn btn btn-style" sec:authorize="hasAuthority('ADMIN')">Изтрий</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="mid-title" th:if="${#lists.isEmpty(resultPatients)}">
+        <p>Няма резултат. Проверете дали сте потърсили правилно пациента (по име и фамилия).</p>
+    </div>
+</div>
+</body>
+</html>

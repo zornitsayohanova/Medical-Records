@@ -1,0 +1,50 @@
+
+.diagnose-title {
+    margin-left: 32%;
+    margin-right: 32%;
+    margin-top: 5%;
+    width: auto;
+}
+
+.search-container {
+    margin-left: 9%;
+}
+
+.search-container .btn, .btn-primary {
+    width: 78% !important;
+    font-size: 2.3rem !important;
+    color: white !important;
+    background-color: transparent !important;
+}
+
+.diagnose-title .btn {
+    outline: none;
+}
+
+
+@media only screen and (min-width: 350px) and (max-width: 1000px) {
+    .block {
+        background-image: url("pics/patient.jpg");
+    }
+
+    menu {
+        margin-top: 32%;
+    }
+
+    .diagnose-title {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .more-btn {
+        padding-left: 14% !important;
+        padding-right: 14% !important;
+    }
+}
+
+@media only screen and (min-width: 350px) and (max-width: 720px) {
+    .diagnose-title {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}

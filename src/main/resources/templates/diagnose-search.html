@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+
+    <title>Диагноза</title>
+
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/diagnose.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="page-title">Диагноза</div>
+<div class="search-bar">
+    <form id="search-form" th:action="@{diagnose/statistics}" th:object="${diagnose}" method="POST">
+        <input type="hidden" name="portion" value="2" />
+        <div class="search-field">
+            <select th:field="${diagnose.diagnoseName}">
+                <option th:each="diagnoseValue : ${T(com.example.MedicalRecords.data.entities.DiagnoseName).values()}"
+                        th:value="${diagnoseValue.displayName}"
+                        th:text="${diagnoseValue.displayName}">
+                </option>
+            </select>
+            <button type="submit" id="search-btn" class="btn btn-primary btn-lg btn-block login-btn">
+                <img src="css/pics/search-bar.png">
+            </button>
+        </div>
+    </form>
+</div>
+<header th:replace="base-fragment::header"></header>
+<img class="background-image" src="/css/pics/diagnose.jpg">
+</body>
+</html>

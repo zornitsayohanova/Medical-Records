@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+
+    <title>Пациент</title>
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/patient.css}" rel="stylesheet" />
+</head>
+<body>
+<header th:replace="base-fragment::header"></header>
+<img class="background-image" src="/css/pics/patient.jpg">
+
+<div>
+   <form class="patient-info-form" data-th-action="@{~/patients/patient}" th:object="${patient}" method="POST">
+       <input type="hidden" name="patientSpecialId" data-th-value="${patient.patientSpecialId}" class="form-control">
+
+       <div class="patient-info">
+            <div class="egn-text" th:text="${patient.egn}"></div>
+            <div class="patient-name" th:text="${patient.firstName}"></div>
+            <div class="patient-name" th:text="${patient.secondName}"></div>
+            <div class="patient-name" th:text="${patient.thirdName}"></div>
+            <div class="text"> Платени ли са здравните осигуровки, през последните 6 месеца? </div>
+            <div class="text-insurance" th:text="${patient.firstName} ? 'Да' : 'Не'"></div>
+            <div class="text"> Личен лекар </div>
+            <div class="text-doctor"
+                 th:text="${patient.gp.firstName + ' ' + patient.gp.secondName + ' ' + patient.gp.thirdName}">
+            </div>
+            <div class="title">
+                Медицински картон
+            </div>
+            <div class="table-container">
+                <div class="scrollbar">
+                    <table class="table medical-record-tbl">
+                        <thead>
+                            <tr>
+                                <th> Диагноза </th>
+                                <th> Медикаменти </th>
+                                <th> Лекар </th>
+                                <th> Дата на посещение </th>
+                                <th> Начална дата болничен </th>
+                                <th> Крайна дата болничен </th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="patientRecord : ${patient.getMedicalRecords()}">
+                                <td th:text="${patientRecord.diagnose.diagnoseName}"></td>
+                                <td th:text="${patientRecord.medication}"></td>
+                                <div class="inline-names">
+                                    <td th:text="${patientRecord.doctor.firstName + ' ' + patientRecord.doctor.secondName + ' ' +patientRecord.doctor.thirdName}"></td>
+                                </div>
+
+                                <td th:text="${#dates.format(patientRecord.visitDate, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#dates.format(patientRecord.treatmentStartDate, 'dd-MM-yyyy')}"></td>
+                                <td th:text="${#dates.format(patientRecord.treatmentEndDate, 'dd-MM-yyyy')}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="new-diagnose-form form-container modal-body" sec:authorize="hasAuthority('DOCTOR')">
+        <div class="title">
+            Добавете диагноза
+        </div>
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form data-th-action="@{/patients/patient/add-record}" th:object="${medicalRecord}" method="POST">
+                        <div class="form-group">
+                            <select th:field="${medicalRecord.diagnose.diagnoseName}">
+                                <option th:each="diagnoseValue : ${T(com.example.MedicalRecords.data.entities.DiagnoseName).values()}"
+                                        th:value="${diagnoseValue.displayName}"
+                                        th:text="${diagnoseValue.displayName}">
+                                </option>
+                            </select>
+                        </div>
+                        <input type="hidden" name="patientSpecialId" data-th-value="${patient.patientSpecialId}" class="form-control">
+
+                        <div class="form-group">
+                            <textarea type="text" th:field="*{medication}" placeholder="Медикаменти" class="form-control"  required="required"> </textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="text">Дата на посещение</div>
+                            <input type="date" th:field="*{visitDate}" class="form-control"  required="required">
+                        </div>
+                        <div class="form-group">
+                            <div class="text">Начална дата на лечение (ако е необходимо)</div>
+                            <input type="date" th:field="*{treatmentStartDate}" class="form-control" >
+                        </div>
+                        <div class="form-group">
+                            <div class="text">Крайна дата на лечение (ако е необходимо)</div>
+
+                            <input type="date" th:field="*{treatmentEndDate}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" th:field="*{patient.patientSpecialId}" placeholder="ID" class="form-control" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Добави диагноза</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

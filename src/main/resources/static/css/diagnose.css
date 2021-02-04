@@ -1,0 +1,51 @@
+
+
+
+.background-info {
+    margin-top: 0 !important;
+    padding-top: 0!important;
+    margin-bottom: 0 !important;
+}
+
+.mid-title .number-text {
+    margin: 2% 45%;
+    border-radius: 120px;
+    background-color: #5A5EA8;
+}
+
+.mid-title .diganose-text {
+    font-size: 31px;
+    font-weight: 700;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.mid-title .btn-style {
+    margin-right: 40% !important;
+    margin-left: 40% !important;
+    margin-bottom: 10% !important;
+    width: 20% !important;
+}
+
+@media only screen and (min-width: 350px) and (max-width: 1000px) {
+    .block {
+        background-image: url("pics/diagnose.jpg");
+    }
+
+    .mid-title {
+        margin-left: 20% !important;
+        margin-right: 20% !important;
+        height: auto;
+        margin-top: 5%;
+        width: auto !important;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mid-title .btn-style {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        margin-bottom: 0 !important;
+        width: auto !important;
+    }
+}

@@ -1,0 +1,111 @@
+
+.patient-info-form {
+    margin-bottom: 6%;
+}
+
+.patient-info {
+    margin-top: 6%;
+}
+
+.patient-info, .title {
+    text-align: center;
+    font-size: 3.7rem;
+    color: white;
+}
+
+.patient-info .title {
+    margin-top: 8%;
+    padding-top: 6%;
+    padding-bottom: 3%;
+    font-size: 3.7rem;
+    background-color: #0188BB;
+}
+
+.egn-text {
+    margin-left: 39%;
+    margin-right: 39%;
+    margin-bottom: 3%;
+    font-size: 3rem;
+}
+
+.patient-name {
+    display: inline-flex;
+    font-size: 2.9rem;
+}
+
+.text {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: white;
+}
+
+.text-insurance {
+    margin: 0 45% 0;
+    padding: 11px 20px;
+    height: 5%;
+    border-radius: 120px;
+    line-height: 45px;
+    background-color: #5A5EA8;
+}
+
+.text-doctor {
+    margin: 30px 25% 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 50%;
+    border-radius: 120px;
+    background-color: #5A5EA8;
+}
+
+.text-insurance, .text-doctor {
+    font-size: 2.9rem;
+}
+
+.table-container, th {
+    background-color: #0188bb;
+}
+
+.scrollbar {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.table-container .scrollbar {
+    scrollbar-color: #51559A rgba(139, 192, 201, 0);
+}
+
+select, option {
+    background-color: #0188bb !important;
+    color: #fffffb !important;
+    font-size: 2.2rem !important;
+}
+
+
+@media only screen and (min-width: 350px) and (max-width: 1000px) {
+    .block {
+        background-image: url("pics/patient.jpg");
+    }
+
+    .diagnose-title {
+        margin-left: 0;
+        margin-right: 0;
+        width: auto;
+    }
+
+    menu {
+        margin-top: 32%;
+    }
+
+    .egn-text, .text-doctor {
+        margin-left: 19%;
+        margin-right: 19%;
+        width: auto;
+    }
+
+    .text-insurance {
+        margin: 0 35% 0;
+        width: 30%;
+    }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        data-th-fragment="layout"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <th:block th:include="base-fragment::head"></th:block>
+
+    <title>Лекари</title>
+    <link th:href="@{/css/shared.css}" rel="stylesheet" />
+    <link th:href="@{/css/doctors.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="page-title">Лекари</div>
+<div class="search-bar">
+    <form id="search-form" th:action="@{/doctors}" th:object="${doctorToSearch}" method="POST">
+        <div class="search-field">
+            <div class="form-group">
+                <input id="filter" name="filter" type="text" th:field="*{firstName}" placeholder="Име и фамилия на лекар" class="form-control input-sm w-auto inline m-r"/>
+                <button type="submit" id="search-btn" class="btn btn-primary btn-lg btn-block login-btn">
+                    <img src="../css/pics/search-bar.png">
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<header th:replace="base-fragment::header"></header>
+
+<img class="background-image" src="/static/css/pics/doctor.jpg">
+<div class="background-info">
+    <div class="list" th:if="${not #lists.isEmpty(resultDoctors)}">
+        <div class="doctors-tbl">
+            <div class="scrollbar">
+              <table id="result" class="table table-borderless">
+                  <thead>
+                    <tr>
+                       <th></th>
+                        <th>Име</th>
+                        <th>Презиме</th>
+                        <th>Фамилия</th>
+                        <th>Специалност/и</th>
+                        <th>Личен лекар ли е?</th>
+                        <th>Брой пациенти</th>
+                        <th sec:authorize="hasAuthority('ADMIN')"></th>
+                     </tr>
+                  </thead>
+                    <tr th:each="doctor:${resultDoctors}">
+                       <td>
+                          <div class="egn-text"></div>
+                       </td>
+                        <td th:text="${doctor.firstName}"></td>
+                        <td th:text="${doctor.secondName}"></td>
+                        <td th:text="${doctor.thirdName}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="specialty:${doctor.specialties}">
+                                    <p th:text="${specialty.specialtyName}"></p>
+                                </li>
+                            </ul>
+                        </td>
+                        <td th:text="${doctor.isGP()}  ? 'Да' : 'Не'"></td>
+                        <td th:text="${doctor.getPatients().size()}"></td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
+                    <form action="#" data-th-action="@{/doctors/delete-doctor}" method="POST">
+                        <input type="hidden" name="doctorSpecialId" data-th-value="${doctor.doctorSpecialId}" class="form-control">
+                        <button type="submit" class="change-btn btn btn-style">Изтрий</button>
+                    </form>
+                </td>
+                    </tr>
+              </table>
+            </div>
+        </div>
+    </div>
+    <div class="mid-title" th:if="${#lists.isEmpty(resultDoctors)}">
+        <p>Няма резултат. Проверете дали сте потърсили правилно лекаря (по име и фамилия).</p>
+    </div>
+</div>
+</body>
+</html>
