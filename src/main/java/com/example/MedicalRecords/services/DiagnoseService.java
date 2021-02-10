@@ -1,11 +1,12 @@
 package com.example.MedicalRecords.services;
 
+import com.example.MedicalRecords.data.entities.Diagnose;
 import com.example.MedicalRecords.dto.DiagnoseDTO;
 
 import java.util.List;
 
 public interface DiagnoseService {
-    int getDiagnosePatientsAmount(String diagnoseName);
+    Diagnose getByDiagnoseId(Long id);
 
-    public List<DiagnoseDTO> getAllDiagnoses();
+    List<DiagnoseDTO> getAllDiagnoses();
 }

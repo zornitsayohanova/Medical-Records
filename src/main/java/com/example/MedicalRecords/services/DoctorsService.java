@@ -1,6 +1,6 @@
 package com.example.MedicalRecords.services;
 
-import com.example.MedicalRecords.data.entities.Specialty;
+import com.example.MedicalRecords.data.entities.Doctor;
 import com.example.MedicalRecords.data.entities.User;
 import com.example.MedicalRecords.dto.DoctorDTO;
 import com.example.MedicalRecords.dto.SpecialtyDTO;
@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface DoctorsService {
     void addOrUpdateDoctor(DoctorDTO currentDoctorDTO) throws InvalidDataException;
+
+    Doctor findDoctorById(long id);
 
     void deleteDoctor(String doctorSpecialId);
 

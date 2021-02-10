@@ -10,7 +10,6 @@ import com.example.MedicalRecords.services.DataService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +21,6 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class DataServiceImpl implements DataService {
-
     private final RoleRepository roleRepository;
 
     private final SpecialtyRepository specialtyRepository;

@@ -13,7 +13,6 @@
     <link th:href="@{/css/entrance.css}" rel="stylesheet" />
 </head>
 <body>
-
 <div id="login" class="modal">
     <div class="login-doc modal-dialog modal-login">
         <div class="modal-content">
@@ -45,15 +44,5 @@
         </div>
     </div>
 </div>
-<script>
-    $(".close").click(function() {
-        if ($('.modal:visible')) {
-            $('.modal').attr('style','display:none !important');
-        } else {
-            $('.modal').attr('style','display:block !important');
-        }
-    });
-</script>
-
 </body>
 </html>

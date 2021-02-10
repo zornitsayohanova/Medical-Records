@@ -1,7 +1,6 @@
 package com.example.MedicalRecords.web.controllers;
 
 import com.example.MedicalRecords.data.entities.User;
-import com.example.MedicalRecords.services.implementations.DataServiceImpl;
 import com.example.MedicalRecords.services.implementations.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,18 +11,14 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.stereotype.Controller;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 
 @ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
@@ -35,10 +30,13 @@ class AuthControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
+    private TestEntityManager testEntityManager;
+
+    @MockBean
     UserServiceImpl userServiceImpl;
 
     @MockBean
-    private TestEntityManager testEntityManager;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     void viewUserRegisterForm() throws Exception {

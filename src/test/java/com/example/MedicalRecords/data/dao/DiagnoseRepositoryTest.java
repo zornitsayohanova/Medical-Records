@@ -7,10 +7,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -24,15 +24,16 @@ class DiagnoseRepositoryTest {
     private DiagnoseRepository diagnoseRepository;
 
     @Test
+    @WithMockUser(username="D1234",authorities={"DOCTOR"})
     void findByDiagnoseName() {
         String diagnoseName = "Анемия";
         Diagnose diagnose = new Diagnose();
         diagnose.setDiagnoseName(diagnoseName);
         diagnose.setDiagnosePatientsAmount(10);
-        diagnose.setDiagnoseSpecialId("10");
+        diagnose.setDiagnoseSpecialId("34");
         testEntityManager.persistAndFlush(diagnose);
 
-        Diagnose foundDiagnose = diagnoseRepository.findByDiagnoseName(diagnose.getDiagnoseName());
+        Diagnose foundDiagnose = diagnoseRepository.findByDiagnoseName(diagnoseName);
 
         assertThat(foundDiagnose.getDiagnoseName()).isEqualTo(diagnose.getDiagnoseName());
     }

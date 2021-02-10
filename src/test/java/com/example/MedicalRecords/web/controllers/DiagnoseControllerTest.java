@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -30,13 +31,16 @@ class DiagnoseControllerTest {
     DataServiceImpl dataServiceImpl;
 
     @MockBean
-    UserServiceImpl userServiceImpl;
-
-    @MockBean
     DiagnoseServiceImpl diagnoseServiceImpl;
 
     @MockBean
     ModelMapper modelMapper;
+
+    @MockBean
+    UserServiceImpl userServiceImpl;
+
+    @MockBean
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     @WithMockUser(username="D1234",authorities={"DOCTOR"})

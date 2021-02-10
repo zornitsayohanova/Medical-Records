@@ -55,7 +55,6 @@ ul {
 .modal-open .modal {
     overflow-x: hidden !important;
     overflow-y: auto !important;
-  //  display: flex; !important;
 }
 
 .modal {

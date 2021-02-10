@@ -13,7 +13,6 @@
     <link th:href="@{/css/doctors.css}" rel="stylesheet" />
 </head>
 <body>
-
 <div class="page-title">Лекари</div>
 <div class="search-bar">
     <form id="search-form" th:action="@{/doctors}" th:object="${doctorToSearch}" method="POST">
@@ -75,7 +74,7 @@
         </div>
     </div>
     <div class="mid-title" th:if="${#lists.isEmpty(resultDoctors)}">
-        <p>Няма резултат. Проверете дали сте потърсили правилно лекаря (по име и фамилия).</p>
+        <p>Няма резултат. Ако сте използвали търсачката, моля, проверете дали сте потърсили правилно лекаря (по име и фамилия).</p>
     </div>
 </div>
 </body>

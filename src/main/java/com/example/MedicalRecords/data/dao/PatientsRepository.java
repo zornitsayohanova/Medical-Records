@@ -6,11 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-//@Repository
+@Repository
 public interface PatientsRepository extends CrudRepository<Patient, Long> {
     Patient findByPatientSpecialId(String id);
-
-  //  List<Patient> findAll();
     List<Patient> findAllByFirstNameOrThirdNameOrEgn(String firstName, String secondName, String egn);
     List<Patient> findAllByFirstNameAndThirdName(String firstName, String secondName);
 }

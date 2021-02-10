@@ -3,36 +3,26 @@ package com.example.MedicalRecords.services.implementations;
 import com.example.MedicalRecords.data.dao.DoctorsRepository;
 import com.example.MedicalRecords.data.dao.SpecialtyRepository;
 import com.example.MedicalRecords.data.entities.Doctor;
-import com.example.MedicalRecords.data.entities.Specialty;
-import com.example.MedicalRecords.data.entities.User;
-import com.example.MedicalRecords.dto.DoctorDTO;
 import com.example.MedicalRecords.services.DoctorsService;
 import com.example.MedicalRecords.services.UserService;
-import com.example.MedicalRecords.web.controllers.AuthController;
 import com.example.MedicalRecords.web.controllers.DoctorsController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.*;
-
 
 @ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
@@ -50,13 +40,16 @@ class DoctorsServiceTest {
     private SpecialtyRepository specialtyRepository;
 
     @MockBean
-    private UserService userService;
-
-    @MockBean
     private DoctorsService doctorsService;
 
     @MockBean
     private ModelMapper modelMapper;
+
+    @MockBean
+    UserServiceImpl userServiceImpl;
+
+    @MockBean
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Test
     @WithMockUser(username="D1234",authorities={"DOCTOR"})
@@ -117,9 +110,5 @@ class DoctorsServiceTest {
         List<Doctor> allDoctors = doctorsRepository.findAll();
 
         assertEquals(1, allDoctors.size());
-    }
-
-    @Test
-    void getSearchResults() {
     }
 }

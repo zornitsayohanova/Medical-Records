@@ -4,16 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.Entity;
 import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//@Where(clause = "is_deleted='false'")
 public class User extends BaseEntity implements UserDetails {
     @Column
     private String username;

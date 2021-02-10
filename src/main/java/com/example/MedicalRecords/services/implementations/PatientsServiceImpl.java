@@ -7,12 +7,10 @@ import com.example.MedicalRecords.exceptions.InvalidDataException;
 import com.example.MedicalRecords.services.PatientsService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.example.MedicalRecords.data.entities.*;
 import com.example.MedicalRecords.data.dao.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +21,6 @@ import java.util.stream.Collectors;
 @Transactional
 @AllArgsConstructor
 public class PatientsServiceImpl implements PatientsService {
-
     private final PatientsRepository patientsRepository;
 
     private final DoctorsRepository doctorsRepository;
@@ -203,68 +200,3 @@ public class PatientsServiceImpl implements PatientsService {
 }
 
 
-
-
-//private DoctorDTO setPatientGP(PatientDTO currentPatient) throws InvalidDataException {
-    /*    Doctor currentPatientGP = doctorsRepository.findByDoctorSpecialId(currentPatient.getGp().getDoctorSpecialId());
-        if(currentPatientGP != null) {
-            if (patient.getGp() == null || !this.hasExistingPatientSameGP(currentPatientGP, patient)) {
-                patient.setGp(currentPatientGP);
-                currentPatientGP.getPatients().add(patient);
-                currentPatientGP.setPatientsAmount(currentPatientGP.getPatientsAmount() + 1);
-            }
-        } else {
-            throw new InvalidDataException("Грешно на ID лекар! Моля, въведете валидно ID.");
-        }
-        doctorsRepository.save(currentPatientGP);
-*/
-
-// }
-
-/*
-    private void setPatientGP(Patient currentPatient, Patient patient)  throws InvalidDataException {
-        Doctor currentPatientGP = doctorsRepository.findByDoctorSpecialId(currentPatient.getGp().getDoctorSpecialId());
-        if(currentPatientGP != null) {
-            if (patient.getGp() != null) {
-                this.setExistingPatientGP(currentPatientGP, patient);
-            }
-
-            //  patient.setGp(currentPatientGP);
-            doctorsRepository.save(currentPatientGP);
-            currentPatientGP.getPatients().add(patient);
-            currentPatientGP.setPatientsAmount(currentPatientGP.getPatientsAmount() + 1);
-        } else {
-            throw new InvalidDataException("Грешно на ID лекар! Моля, въведете валидно ID.");
-        }
-    }
-
-    private void setExistingPatientGP(Doctor currentPatientGP, Patient patient) {
-        Doctor oldGP = doctorsRepository.findByDoctorSpecialId(patient.getGp().getDoctorSpecialId());
-        if (!currentPatientGP.getDoctorSpecialId().equals(oldGP.getDoctorSpecialId())) {
-            oldGP.getPatients().remove(patient);
-            oldGP.setPatientsAmount(oldGP.getPatientsAmount() - 1);
-        }
-    }
-
-    */
-
-       /* currentPatient.setFirstName(currentPatient.getFirstName());
-        currentPatient.setSecondName(currentPatient.getSecondName());
-        currentPatient.setThirdName(currentPatient.getThirdName());
-        currentPatient.setEgn(currentPatient.getEgn());
-        currentPatient.setInsurancePaid(currentPatient.isInsurancePaid());
-
-        patientsRepository.save(patient);
-
-        this.checkPatientEGN(currentPatient);
-       this.setPatientGP(currentPatient, patient);*/
-
-  /*   Doctor d = doctorsRepository
-                .findByDoctorSpecialId(currentPatientDTO.getGp().getDoctorSpecialId());
-
-        currentPatientDTO.setGp(d);
-        Patient p = this.convertToPatient(currentPatientDTO);
-        patientsRepository.save(p);
-
-        d.getPatients().add(p);
-        doctorsRepository.save(d);*/

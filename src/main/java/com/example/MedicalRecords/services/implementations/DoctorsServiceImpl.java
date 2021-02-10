@@ -6,7 +6,6 @@ import com.example.MedicalRecords.exceptions.InvalidDataException;
 import com.example.MedicalRecords.services.DoctorsService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.example.MedicalRecords.data.entities.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 @Transactional
 @AllArgsConstructor
 public class DoctorsServiceImpl implements DoctorsService {
-
     private final DoctorsRepository doctorsRepository;
 
     private final SpecialtyRepository specialtyRepository;
@@ -38,6 +36,11 @@ public class DoctorsServiceImpl implements DoctorsService {
         }
         currentDoctorDTO.setSpecialties(currentDoctorDTO.getSpecialties());
         doctorsRepository.save(this.convertToDoctor(currentDoctorDTO));
+    }
+
+    @Override
+    public Doctor findDoctorById(long id) {
+        return doctorsRepository.findById(id).get();
     }
 
     public void deleteDoctor(String doctorSpecialId) {

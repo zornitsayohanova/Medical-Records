@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @Controller
 @AllArgsConstructor
 public class DoctorsController {
-
     private final DoctorsService doctorsService;
 
     private final UserService userService;

@@ -1,4 +1,5 @@
 package com.example.MedicalRecords.data.entities;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -36,7 +37,7 @@ public class Doctor extends BaseEntity {
     @Column
     private boolean isGP;
 
-    @OneToMany//(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @OneToMany
     @Column
     private List<Patient> patients;
 

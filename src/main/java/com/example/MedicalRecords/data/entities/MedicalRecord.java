@@ -1,4 +1,5 @@
 package com.example.MedicalRecords.data.entities;
+
 import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,6 @@ import static javax.persistence.TemporalType.DATE;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
 public class MedicalRecord extends BaseEntity {
     @ManyToOne
     private Patient patient;

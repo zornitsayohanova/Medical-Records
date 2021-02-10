@@ -39,7 +39,13 @@
                                 <input type="text" th:field="*{egn}" placeholder="ЕГН" class="form-control" name="id" required="required" />
                             </div>
                             <div class="form-group">
-                                <input type="text" th:field="*{gp.doctorSpecialId}" placeholder="ID на Джи Пи" class="form-control" name="id" required="required" />
+                                <label>Джи Пи</label>
+                                <select th:field="*{gp.id}">
+                                    <option th:each="gp:${allDoctors}"
+                                            th:value="${gp.id}"
+                                            th:text="${gp.firstName + ' ' + gp.secondName + ' '+ gp.thirdName}">
+                                    </option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Платени ли са здравните осигуровки последните 6 месеца?</label>

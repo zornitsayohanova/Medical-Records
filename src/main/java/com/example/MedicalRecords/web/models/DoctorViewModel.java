@@ -13,8 +13,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class DoctorViewModel {
+    private long id;
 
     private String doctorSpecialId;
 

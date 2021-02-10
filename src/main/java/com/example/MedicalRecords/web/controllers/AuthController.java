@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 @AllArgsConstructor
 public class AuthController {
-
     private final UserServiceImpl userService;
 
     private User getUser() {
@@ -44,7 +43,6 @@ public class AuthController {
     @PostMapping("/register")
     public String registerUser(Model model,
                                @ModelAttribute User user, BindingResult bindingResult) {
-
         if(bindingResult.hasErrors()) {
             return "home";
         }
@@ -88,7 +86,6 @@ public class AuthController {
     public String loginUser(@RequestParam(required = false) String error, Model model) {
         if(error != null) {
             model.addAttribute("error", "Грешни данни!");
-           // return "login";
         }
         return "login";
     }

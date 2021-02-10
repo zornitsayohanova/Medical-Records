@@ -75,10 +75,10 @@
                 <div class="modal-body">
                     <form data-th-action="@{/patients/patient/add-record}" th:object="${medicalRecord}" method="POST">
                         <div class="form-group">
-                            <select th:field="${medicalRecord.diagnose.diagnoseName}">
-                                <option th:each="diagnoseValue : ${T(com.example.MedicalRecords.data.entities.DiagnoseName).values()}"
-                                        th:value="${diagnoseValue.displayName}"
-                                        th:text="${diagnoseValue.displayName}">
+                            <select th:field="*{diagnose.id}">
+                                <option th:each="currentDiagnose:${AllDiagnoses}"
+                                        th:value="${currentDiagnose.id}"
+                                        th:text="${currentDiagnose.diagnoseName}">
                                 </option>
                             </select>
                         </div>
@@ -112,6 +112,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

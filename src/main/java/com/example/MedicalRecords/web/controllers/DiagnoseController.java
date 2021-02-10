@@ -2,10 +2,8 @@ package com.example.MedicalRecords.web.controllers;
 
 import com.example.MedicalRecords.data.entities.Diagnose;
 import com.example.MedicalRecords.dto.DiagnoseDTO;
-import com.example.MedicalRecords.dto.SpecialtyDTO;
 import com.example.MedicalRecords.services.DiagnoseService;
 import com.example.MedicalRecords.web.models.DiagnoseViewModel;
-import com.example.MedicalRecords.web.models.SpecialtyViewModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,7 +19,6 @@ import java.util.stream.Collectors;
 @Controller
 @AllArgsConstructor
 public class DiagnoseController {
-
     private final DiagnoseService diagnoseService;
 
     private final ModelMapper modelMapper;
@@ -30,6 +27,10 @@ public class DiagnoseController {
     @GetMapping("/diagnose")
     private String viewDiagnose(Model model) {
         model.addAttribute("diagnose", new Diagnose());
+        model.addAttribute("AllDiagnoses", diagnoseService.getAllDiagnoses()
+                .stream()
+                .map(this::convertToDiagnoseViewModel)
+                .collect(Collectors.toList()));
 
         return "diagnose-search";
     }
@@ -37,12 +38,11 @@ public class DiagnoseController {
     @PreAuthorize("hasRole('DOCTOR')")
     @PostMapping("/diagnose")
     private String viewDiagnose(Model model, BindingResult bindingResult) {
-        model.addAttribute("diagnose", new Diagnose());
+        if(bindingResult.hasErrors()) {
+            return "home";
+        }
 
-        model.addAttribute("diagnoses", diagnoseService.getAllDiagnoses()
-                .stream()
-                .map(this::convertToDiagnoseViewModel)
-                .collect(Collectors.toList()));
+        model.addAttribute("diagnose", new Diagnose());
 
         return "diagnose-search";
     }
@@ -53,11 +53,10 @@ public class DiagnoseController {
         if(bindingResult.hasErrors()) {
             return "home";
         }
+        Diagnose currentDiagnose = diagnoseService.getByDiagnoseId(diagnose.getId());
 
-        model.addAttribute("diagnose", diagnose);
         model.addAttribute("message", "Вижте резултатите долу");
-        model.addAttribute("diagnosePatientsAmount", diagnoseService
-                .getDiagnosePatientsAmount(diagnose.getDiagnoseName()));
+        model.addAttribute("diagnosePatientsAmount", currentDiagnose.getDiagnosePatientsAmount());
         model.addAttribute("diagnoseName", diagnose.getDiagnoseName());
 
         return "diagnose-result";

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @AllArgsConstructor
 public class HomeController {
-
     private final DataService dataService;
 
     @GetMapping("/")

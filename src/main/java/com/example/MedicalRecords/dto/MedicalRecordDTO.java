@@ -20,7 +20,6 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class MedicalRecordDTO {
-
     private Patient patient;
 
     private Doctor doctor;

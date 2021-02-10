@@ -6,7 +6,6 @@ import com.example.MedicalRecords.exceptions.InvalidDataException;
 import com.example.MedicalRecords.exceptions.UserAlreadyExistsException;
 import com.example.MedicalRecords.services.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,7 +17,6 @@ import java.util.Set;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserDetailsService, UserService {
-
     private final UserRepository userRepository;
 
     private final RoleRepository roleRepository;
@@ -27,7 +25,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public void registerUser(User user) throws UserAlreadyExistsException, InvalidDataException {
-
         String encryptedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
         user.setPassword(encryptedPassword);

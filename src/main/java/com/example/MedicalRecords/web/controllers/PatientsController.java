@@ -1,9 +1,13 @@
 package com.example.MedicalRecords.web.controllers;
+import com.example.MedicalRecords.data.entities.Diagnose;
+import com.example.MedicalRecords.dto.DiagnoseDTO;
 import com.example.MedicalRecords.dto.MedicalRecordDTO;
 import com.example.MedicalRecords.dto.PatientDTO;
 import com.example.MedicalRecords.exceptions.InvalidDataException;
+import com.example.MedicalRecords.services.DiagnoseService;
 import com.example.MedicalRecords.services.PatientsService;
 import com.example.MedicalRecords.services.UserService;
+import com.example.MedicalRecords.web.models.DiagnoseViewModel;
 import com.example.MedicalRecords.web.models.MedicalRecordViewModel;
 import com.example.MedicalRecords.web.models.PatientViewModel;
 import lombok.AllArgsConstructor;
@@ -23,8 +27,9 @@ import java.util.stream.Collectors;
 @Controller
 @AllArgsConstructor
 public class PatientsController {
-
     private final PatientsService patientsService;
+
+    private final DiagnoseService diagnoseService;
 
     private final ModelMapper modelMapper;
 
@@ -93,7 +98,6 @@ public class PatientsController {
     @PreAuthorize("hasRole('DOCTOR')")
     @GetMapping("patients/patient")
     private String getPatient(Model model, @RequestParam("patientSpecialId") String patientSpecialId) {
-
         addPatientPageAttributes(model, patientSpecialId, new MedicalRecordViewModel());
 
         return "patient";
@@ -107,6 +111,11 @@ public class PatientsController {
         if(bindingResult.hasErrors()) {
             return "home";
         }
+
+        model.addAttribute("AllDiagnoses", diagnoseService.getAllDiagnoses()
+                .stream()
+                .map(this::convertToDiagnoseViewModel)
+                .collect(Collectors.toList()));
         addPatientPageAttributes(model, patientSpecialId, medicalRecordViewModel);
 
         return "patient";
@@ -120,6 +129,10 @@ public class PatientsController {
         if(bindingResult.hasErrors()) {
             return "home";
         }
+
+        Diagnose currentDiagnose = diagnoseService.getByDiagnoseId(medicalRecordViewModel.getDiagnose().getId());
+        medicalRecordViewModel.setDiagnose(currentDiagnose);
+
         try {
             patientsService.addMedicalRecord(patientSpecialId,
                     modelMapper.map(medicalRecordViewModel, MedicalRecordDTO.class));
@@ -141,5 +154,9 @@ public class PatientsController {
 
     private PatientViewModel convertToPatientViewModel(PatientDTO patientDTO) {
         return modelMapper.map(patientDTO, PatientViewModel.class);
+    }
+
+    private DiagnoseViewModel convertToDiagnoseViewModel(DiagnoseDTO diagnoseDTO) {
+        return modelMapper.map(diagnoseDTO, DiagnoseViewModel.class);
     }
 }
