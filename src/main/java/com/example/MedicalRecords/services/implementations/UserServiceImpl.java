@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -37,15 +39,19 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             user.setAccountNonExpired(true);
             user.setEnabled(true);
 
+            Set<Role> authorities = new HashSet<Role>(){};
+
             if(user.getUsername().contains("D")) {
                 Role authority = roleRepository.findByAuthority("DOCTOR");
-                user.setAuthorities(Set.of(authority));
+                authorities.add(authority);
+                user.setAuthorities(authorities);
             } else if(user.getUsername().contains("P")) {
                 Role authority = roleRepository.findByAuthority("PATIENT");
-                user.setAuthorities(Set.of(authority));
+                authorities.add(authority);
+                user.setAuthorities(authorities);
             } else if(user.getUsername().contains("A")) {
                 Role authority = roleRepository.findByAuthority("ADMIN");
-                user.setAuthorities(Set.of(authority));
+                authorities.add(authority);
             } else {
                throw new InvalidDataException("Потребителското име е невалидно!");
             }

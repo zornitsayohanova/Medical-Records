@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Role<T> extends  BaseEntity implements GrantedAuthority {
+public class Role extends  BaseEntity implements GrantedAuthority {
     @Column
     private String roleId;
 
